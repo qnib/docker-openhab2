@@ -1,0 +1,62 @@
+version: '2'
+services:
+  consul:
+    image: qnib/alpn-consul
+    container_name: consul
+    hostname: consul
+    #networks:
+    # - openhab2
+    ports:
+     - "8500:8500"
+    environment:
+     - DC_NAME=openhab
+     - CONSUL_BOOTSTRAP_EXPECT=1
+    dns: 127.0.0.1
+    hostname: consul
+    privileged: true
+
+  openhab:
+    image: qnib/openhab2
+    container_name: openhab
+    hostname: openhab
+    #networks:
+    # - openhab2
+    ports:
+    - "8080:8080"
+    environment:
+     - DC_NAME=openhab
+     - CONSUL_CLUSTER_IPS=consul
+    dns:
+     - consul
+     - 8.8.8.8
+    hostname: openhab
+    privileged: true
+
+  influxdb:
+    image: qnib/influxdb
+    hostname: influxdb
+    container_name: influxdb
+    dns: consul
+    volumes:
+     - /opt/influxdb/shared
+    environment:
+     - COLLECT_METRICS=false
+     - DC_NAME=openhab
+     - INFLUXDB_DATABASES=qcollect
+     - CONSUL_CLUSTER_IPS=consul
+    ports:
+     - 2003:2003
+     - 8083:8083
+     - 8086:8086
+
+  grafana3:
+    image: qnib/grafana3
+    container_name: grafana3
+    ports:
+     - "3000:3000"
+    dns: consul
+    hostname: grafana3
+    environment:
+     - COLLECT_METRICS=false
+     - CONSUL_CLUSTER_IPS=consul
+     - DC_NAME=openhab

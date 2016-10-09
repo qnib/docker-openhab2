@@ -1,0 +1,6 @@
+sitemap hue label="Main Menu"
+{
+Frame {
+    Switch item=GroupSwitch mappings=[OFF="All Off", ON="All On"]
+    }
+}

@@ -1,0 +1,10 @@
+Group Example
+
+Group:Switch:OR(ON, OFF) GroupSwitch "All Lights [(%d)]" (Example)
+
+/* Lights */
+Switch Toggle_1 "Esstisch" (GroupSwitch) {hue="3"}
+Switch Toggle_2 "Filmlampe" (GroupSwitch) {hue="5"}
+Switch Toggle_3 "Schlafzimmer" (GroupSwitch) {hue="6"}
+Switch Toggle_4 "Küche" (GroupSwitch) {hue="7"}
+Switch Toggle_5 "Flur" (GroupSwitch) {hue="8"}

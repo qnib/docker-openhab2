@@ -31,6 +31,9 @@ services:
      - 8.8.8.8
     hostname: openhab
     privileged: true
+    volumes:
+     - ./opt/openhab/conf/:/opt/openhab/conf/
+     - ./opt/openhab/configurations/:/opt/openhab/configurations/
 
   influxdb:
     image: qnib/influxdb

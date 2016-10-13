@@ -7,5 +7,5 @@ wait_for_srv consul-http
 
 echo Launching the openHAB runtime...
 
-DIRNAME=/opt/openhab
-exec "${DIRNAME}/runtime/karaf/bin/karaf" "${@}"
+cd ${OPENHAB_HOME}
+/opt/openhab/runtime/karaf/bin/karaf server
